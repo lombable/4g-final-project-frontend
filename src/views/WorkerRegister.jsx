@@ -25,13 +25,13 @@ const ClientRegister = () => {
                     <div className="row">
                       <div className="col-md-6 mb-4">
                         <div className="form-outline">
-                          <input type="text" id="form3Example1m" className="form-control form-control-lg" placeholder="Fulanito" />
+                          <input type="text" id="form3Example1m" name="first_name" className="form-control form-control-lg" placeholder="Fulanito" />
                           <label className="form-label" for="form3Example1m">First name</label>
                         </div>
                       </div>
                       <div className="col-md-6 mb-4">
                         <div className="form-outline">
-                          <input type="text" placeholder="Pérez" id="form3Example1n" className="form-control form-control-lg" />
+                          <input type="text" name="last_name" placeholder="Pérez" id="form3Example1n" className="form-control form-control-lg" />
                           <label className="form-label" for="form3Example1n">Last name</label>
                         </div>
                       </div>
@@ -40,56 +40,22 @@ const ClientRegister = () => {
                     <div className="row">
                       <div className="col-md-6 mb-4">
                         <div className="form-outline">
-                          <input type="text" id="form3Example1m1" placeholder="12.345.678-K" className="form-control form-control-lg" />
+                          <input type="text" id="form3Example1m1" name="rut" placeholder="12.345.678-K" className="form-control form-control-lg" />
                           <label className="form-label" for="form3Example1m1">R.U.T number</label>
                         </div>
                       </div>
                     </div>
 
                     <div className="form-outline mb-4">
-                      <input type="text" placeholder="Av. Manquehue Sur 350, Oficina 110, Las Condes, Región Metropolitana" id="form3Example8" className="form-control form-control-lg" />
+                      <input type="text" name="address" placeholder="Av. Manquehue Sur 350, Oficina 110, Las Condes, Región Metropolitana" id="form3Example8" className="form-control form-control-lg" />
                       <label className="form-label" for="form3Example8">Home Address</label>
                     </div>
 
-                    <div className="d-md-flex justify-content-start align-items-center mb-4 py-2">
-
-                      <h6 className="mb-0 me-4">Gender: </h6>
-
-                      <div className="form-check form-check-inline mb-0 me-4">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="inlineRadioOptions"
-                          id="femaleGender"
-                          value="option1" />
-                        <label className="form-check-label" for="femaleGender">Female</label>
-                      </div>
-
-                      <div className="form-check form-check-inline mb-0 me-4">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="inlineRadioOptions"
-                          id="maleGender"
-                          value="option2" />
-                        <label className="form-check-label" for="maleGender">Male</label>
-                      </div>
-                    </div>
-
-                    <div className="row">
+                       <div className="row">
+                      
                       <div className="col-md-6 mb-4">
 
-                        <select className="select">
-                          <option value="1">Please select the restaurant location</option>
-                          <option value="2">Región Metropolitana</option>
-                          <option value="3">Región de Valparaiso</option>
-                          <option value="4">Región de Los Lagos</option>
-                        </select>
-
-                      </div>
-                      <div className="col-md-6 mb-4">
-
-                        <select className="select">
+                        <select className="select" name="city">
                           <option value="1">City</option>
                           <option value="2">Santiago Centro</option>
                           <option value="3">Macul</option>
@@ -100,13 +66,18 @@ const ClientRegister = () => {
                     </div>
 
                     <div className="form-outline mb-4">
-                      <input type="text" id="form3Example9" className="form-control form-control-lg" />
+                      <input type="text" name="dob" id="form3Example9" className="form-control form-control-lg" />
                       <label className="form-label" for="form3Example9">Date of Birth</label>
                     </div>
 
                     <div className="form-outline mb-4">
-                      <input type="text" id="form3Example97" className="form-control form-control-lg" />
+                      <input type="text" id="form3Example97" name="email" className="form-control form-control-lg" />
                       <label className="form-label" for="form3Example97">Email</label>
+                    </div>
+
+                    <div className="form-outline mb-4">
+                      <input type="password" id="form3Example97" name="password" className="form-control form-control-lg" />
+                      <label className="form-label" for="form3Example97">Password</label>
                     </div>
 
                     <div className="d-flex justify-content-end pt-3">

@@ -13,16 +13,12 @@ import AdminPanel from "./views/AdminPanel";
 import Sidebar from "./components/Sidebar";
 import './App.css'
 import ClientLogin from "./views/ClientLogin"
+import AdminTables from "./views/AdminTables";
+import TableCreation from "./views/TableCreation";
 
 function App() {
   return (
     <Router>
-      <div class="container-fluid overflow-hidden">
-        <div class="row vh-100 overflow-auto">
-          {/* <div className="col-4 col-sm-3 col-xl-2 px-sm-2 px-0 bg-light d-flex sticky-top">
-            <Sidebar />
-          </div> */}
-          <div className="col-md-12">
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route exact path="/home" element={<Home />} />
@@ -30,10 +26,9 @@ function App() {
               <Route exact path="/client-login" element={<ClientLogin />} />
               <Route exact path="/worker-register" element={<WorkerRegister />} />
               <Route exact path="/admin-panel" element={<AdminPanel />} />
+              <Route exact path="/admin-tables" element={<AdminTables />} />
+              <Route exact path="/table-creation" element={<TableCreation />} />
             </Routes>
-          </div>
-        </div>
-      </div >
     </Router >
   );
 }

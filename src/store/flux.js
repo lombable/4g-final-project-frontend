@@ -1,21 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			favorite: [],
-			people: [],
-			planets: [],
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			currentUser: ["admin"],
+			table: ["1"],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -24,26 +11,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				store.favorite = [] ? "No has agregado favoritos aún" : store.favorite
 			},
 
-			addFavorites: (characterName) => {
+			addTable: () => {
 				const store = getStore();
-				setStore({ favorite: store.favorite.concat(characterName) });
+				setStore({ favorite: store.table.concat() });
 			},
-
-			loadCharacters: () => {
-				fetch("https://swapi.dev/api/people/").then((data) => {
-					return data.json();
-				}).then((res) => {
-					setStore({ people: res.results })
-				})
-			},
-
-			loadPlanets: () => {
-				fetch("https://swapi.dev/api/planets/").then((data) => {
-					return data.json();
-				}).then((res) => {
-					setStore({ planets: res.results })
-				})
-			},
+			
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();

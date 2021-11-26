@@ -41,7 +41,7 @@ const Login = () => {
                                         </div>
 
                                         <div className="pt-1 mb-4">
-                                            <button className="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                                            <a href="/admin-panel" className="btn btn-dark btn-lg btn-block" type="button">Login</a>
                                         </div>
 
                                         <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>Don't have an account? <a href="/worker-register" style={{ color: "#393f81" }}>Register here</a></p>

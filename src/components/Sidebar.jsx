@@ -21,7 +21,7 @@ const Sidebar = () => {
                                 <i className="fs-5 bi-speedometer2"></i><span className="ms-1 d-none d-sm-inline">Pedidos</span> </a>
                         </li>
                         <li>
-                            <a href="#" className="nav-link px-sm-0 px-2">
+                            <a href="admin-tables" className="nav-link px-sm-0 px-2">
                                 <i className="fs-5 bi-table"></i><span className="ms-1 d-none d-sm-inline">Mesas</span></a>
                         </li>
                         <li>
