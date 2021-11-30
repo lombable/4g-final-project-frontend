@@ -1,7 +1,23 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
+import { Context } from "../store/appContext";
+import { useContext } from "react";
 
 const AdminTables = () => {
+
+    const { store } = useContext(Context);
+
+    const tableRowGenerator = store.table.map((tables) => {
+        return (
+            <tr>
+            <th scope="row">{tables}</th>
+            <td></td>
+            <td></td>
+            <td>X</td>
+        </tr>
+            )
+    })
+
     return (
         <>
             <div class="container-fluid overflow-hidden">
@@ -18,8 +34,8 @@ const AdminTables = () => {
                                 <hr />
                             </div>
                             <div className="row">
-                                <div className="col pt-4">
-                                    <a className="btn btn-success text-center justify-content-around" href="/table-creation" role="button">Add a table</a>
+                                <div className="col pt-4 text-center">
+                                    <a className="mx-auto btn btn-success text-center justify-content-around" href="/table-creation" role="button">Add a table</a>
                                 </div>
                             </div>
                             <div className="row text-center">
@@ -34,12 +50,7 @@ const AdminTables = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td>X</td>
-                                            </tr>
+                                            {tableRowGenerator}
                                         </tbody>
                                     </table>
                                 </div>

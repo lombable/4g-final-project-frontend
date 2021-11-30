@@ -51,8 +51,8 @@ const ClientRegister = () => {
                       <label className="form-label" for="form3Example8">Home Address</label>
                     </div>
 
-                       <div className="row">
-                      
+                    <div className="row">
+
                       <div className="col-md-6 mb-4">
 
                         <select className="select" name="city">
