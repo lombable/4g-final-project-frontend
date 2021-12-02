@@ -1,6 +1,12 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			path: 'http://127.0.0.1:5000',
+			error: null,
+			email: null,
+			password: null,
+			isAuthenticated: false,
+			currentUser: null,
 			currentUser: ["admin"],
 			table: ["1", "2", "3", "4"],
 			users: [
@@ -56,6 +62,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore(store.table.concat(table));
 			},
 
+			login: (formData) => {
+                const store = getStore();
+                fetch(store.path + '/login/', {
+                    method: 'POST',
+                    body: JSON.stringify(formData),
+                })
+                    .then (resp => resp.json())
+                    .then(data => {
+                        if (data.msg) {
+                            setStore({
+                                error: data
+                            })
+                        } else {
+                            setStore({
+                                currentUser: data,
+                                isAuthenticated: true,
+                                email: null,
+                                password: null,
+                                error: null,
+                                role: null
+                            })
+                        }
+                    })
+            },
+
 			loadCharacters: () => {
 				fetch(process.env.REACT_APP_API_URL + "/profile/api/v1/users/").then((data) => {
 					return data.json();
@@ -63,6 +94,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ people: res.results })
 				})
 			},
+
+			handleChange: e => {
+                setStore({
+                    [e.target.name]: e.target.value
+                })
+            },
 
 			changeColor: (index, color) => {
 				//get the store

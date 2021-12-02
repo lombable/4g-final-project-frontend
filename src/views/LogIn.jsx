@@ -1,11 +1,37 @@
-import React from "react";
+import { React, useContext, useState } from "react";
 import "bootstrap";
 import '../App.css';
 import Navbar from "../components/Navbar";
+import { Context } from '../store/appContext'
 
 const Login = () => {
+
+    const { store, actions } = useContext(Context)
+
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+    });
+
+    
+    const handleChange = (e) => {
+        console.log(e.target.name, e.target.value);
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    }
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        actions.login(formData)
+    }
+    
+
     return (
         <>
+
+        
             <Navbar />
             <div className="row pt-5 mt-5 d-flex justify-content-center align-items-center h-100" style={{ backgroundColor: "#d4d6d9" }}>
                 <div className="col col-xl-10">
@@ -21,27 +47,27 @@ const Login = () => {
                             <div className="col-md-6 col-lg-7 d-flex align-items-center">
                                 <div className="card-body p-4 p-lg-5 text-black">
 
-                                    <form>
+                                    <form onSubmit={handleSubmit}>
 
                                         <div className="d-flex align-items-center mb-3 pb-1">
-                                            <i class="fas fa-stethoscope" style={{ color: "#ff6219" }}></i>
+                                            <i className="fas fa-stethoscope" style={{ color: "#ff6219" }}></i>
                                             <span className="h1 fw-bold mb-0">Welcome back!</span>
                                         </div>
 
                                         <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>Sign into your account</h5>
 
                                         <div className="form-outline mb-4">
-                                            <input type="email" id="form2Example17" className="form-control form-control-lg" />
-                                            <label className="form-label" for="form2Example17">Email address</label>
+                                            <input type="email" id="form2Example17" className="form-control form-control-lg" onChange={handleChange} />
+                                            <label className="form-label" name="email" for="form2Example17">Email address</label>
                                         </div>
 
                                         <div className="form-outline mb-4">
-                                            <input type="password" id="form2Example27" className="form-control form-control-lg" />
-                                            <label className="form-label" for="form2Example27">Password</label>
+                                            <input type="password" id="form2Example27" className="form-control form-control-lg" onChange={handleChange}/>
+                                            <label className="form-label" name="password" for="form2Example27">Password</label>
                                         </div>
 
                                         <div className="pt-1 mb-4">
-                                            <a href="/admin-panel" className="btn btn-dark btn-lg btn-block" type="button">Login</a>
+                                            <button href="/admin-panel" className="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                                         </div>
 
                                         <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>Don't have an account? <a href="/worker-register" style={{ color: "#393f81" }}>Register here</a></p>
