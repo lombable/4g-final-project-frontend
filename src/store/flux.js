@@ -1,13 +1,25 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			path: 'http://127.0.0.1:5000',
+			path: 'https://reqres.in',
 			error: null,
 			email: null,
 			password: null,
 			isAuthenticated: false,
 			currentUser: null,
-			currentUser: ["admin"],
+			token: null,
+			first_name: null,
+			last_name: null,
+			rut: null,
+			address: null,
+			city: null,
+			dob: null,
+			productName: null,
+			productPrice: null,
+			productCategory: null,
+			productImg: null,
+			productDescription: null,
+			isAvailable: null,
 			table: ["1", "2", "3", "4"],
 			users: [
 				{
@@ -62,14 +74,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore(store.table.concat(table));
 			},
 
-			login: (formData) => {
+			login: async (formData) => {
                 const store = getStore();
-                fetch(store.path + '/login/', {
+                await fetch(store.path + '/api/login', {
                     method: 'POST',
+					headers: {"Content-Type": "application/json"},
                     body: JSON.stringify(formData),
                 })
                     .then (resp => resp.json())
-                    .then(data => {
+                    .then (data => {
                         if (data.msg) {
                             setStore({
                                 error: data
@@ -86,14 +99,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                         }
                     })
             },
-
-			loadCharacters: () => {
-				fetch(process.env.REACT_APP_API_URL + "/profile/api/v1/users/").then((data) => {
-					return data.json();
-				}).then((res) => {
-					setStore({ people: res.results })
-				})
-			},
 
 			handleChange: e => {
                 setStore({

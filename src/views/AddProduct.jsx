@@ -8,18 +8,25 @@ const AddProducts = () => {
     const { actions, store } = useContext(Context);
 
     const [formData, setFormData] = useState({
-        table: ""
+        productName: "",
+        productCategory: "",
+        productPrice: "",
+        productDescription: "",
+        isAvailable: ""
     });
 
-    const onChange = (e) => {
-        setFormData(e.target.value);
-        console.log(e);
+    const handleChange = (e) => {
+        console.log(e.target.name, e.target.value)
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
     }
 
-    const onSubmit = (e) => {
+    const handleSubmit = (e) => {
+        console.log(formData)
         e.preventDefault();
-        console.log(formData, store);
-        actions.addTable(formData);
+        actions.login(formData)
     }
 
     return (
@@ -30,33 +37,33 @@ const AddProducts = () => {
                 </div>
                 <div className="col-md-8">
                     <div className="mx-4 col d-flex flex-column h-sm-100">
-                        <form className="border border-light pt-5" onSubmit={onSubmit}>
+                        <form className="border border-light pt-5" onSubmit={handleSubmit}>
 
                             <p className="h4 mb-4 text-center">Add a Product</p>
 
                             <label for="textInput">Name of the product</label>
-                            <input type="text" id="productName" className="form-control mb-4" placeholder="Pizza Margharita" />
+                            <input type="text" id="productName" name="productName" className="form-control mb-4" placeholder="Pizza Margharita" onChange={handleChange} />
 
                             <label for="textInput">Price</label>
-                            <input type="text" id="productPrice" className="form-control mb-4" placeholder="$ 6.500 clp" />
+                            <input type="text" id="productPrice" name="productPrice" className="form-control mb-4" placeholder="$ 6.500 clp" onChange={handleChange} />
 
                             <label for="productCategory">Category of the new product:</label><br /><br />
-                            <select className="browser-default custom-select mb-4" id="productCategory">
-                                <option value="" disabled="" selected="">Category</option>
-                                <option value="1">Drinks</option>
-                                <option value="2">Pizzas</option>
-                                <option value="3">Pastas</option>
-                                <option value="3">Burgers</option>
-                                <option value="3">Meat</option>
-                                <option value="3">Desserts</option>
+                            <select className="browser-default custom-select mb-4" name="productCategory" id="productCategory" onChange={handleChange}>
+                                <option value="" disabled="">Category</option>
+                                <option value="drinks">Drinks</option>
+                                <option value="pizzas">Pizzas</option>
+                                <option value="pastas">Pastas</option>
+                                <option value="burgers">Burgers</option>
+                                <option value="meat">Meat</option>
+                                <option value="desserts">Desserts</option>
                             </select>
                             <br />
                             <label for="textarea">Description of the product</label>
-                            <textarea id="textarea" className="form-control mb-4" placeholder="Description"></textarea>
+                            <textarea id="textarea" className="form-control mb-4" name="productDescription" placeholder="Description" onChange={handleChange}></textarea>
 
                             <div className="custom-control custom-checkbox mb-4">
-                                <input type="checkbox" className="custom-control-input" id="checkbox" />
-                                <label className="custom-control-label" for="checkbox">Is it available right now?</label>
+                                <input type="checkbox" className="custom-control-input" name="isAvailable" onChange={handleChange} id="checkbox" />
+                                <label className="custom-control-label" for="checkbox"> Is it available right now?</label>
                             </div>
                             <div className="d-grid gap-2">
                                 <button className="btn btn-success" type="submit">Add product</button>
