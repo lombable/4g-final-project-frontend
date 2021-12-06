@@ -19,6 +19,7 @@ const ClientRegister = () => {
     address: '',
     email: '',
     password: '',
+    phone_number: '',
   });
 
 

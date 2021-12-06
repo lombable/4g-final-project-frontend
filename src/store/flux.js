@@ -1,7 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			path: 'https://reqres.in',
+			path: 'https://desolate-ridge-14789.herokuapp.com',
+            currentUser: null,
 			error: null,
 			email: null,
 			password: null,
@@ -20,25 +21,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			productCategory: null,
 			productImg: null,
 			productDescription: null,
-			isAvailable: null,
+			is_active: null,
+            is_admin: null,
 			table: ["1", "2", "3", "4"],
-			users: [
-				{
-					username: "redgar",
-					email: "rinconaedgar@gmail.com",
-					first_name: "Edgar",
-					last_name: "Rincón",
-					isActive: true,
-					isStaff: true
-				},
-				{
-					username: "ejemplo1",
-					email: "ejemplo@gmail.com",
-					first_name: "Ejemplo",
-					last_name: "Rincón",
-					isActive: true,
-					isStaff: false
-				},],
+			users: [],
 			products: [
 				{
 					productImg: "../img/bk-agua.png",
@@ -63,6 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			]
 		},
+
 		actions: {
 			// Use getActions to call a function within a fuction
 
@@ -70,6 +57,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore(store.table.concat(table));
 			},
+
+            getUsers: () => {
+                const store = getStore();
+                fetch(store.path + '/profile/api/v1/users/', {
+                    method: 'GET',
+					headers: {"Content-Type": "application/json"},                })
+                    .then (resp => resp.json())
+                    .then (data => {
+                        
+                            setStore({ users: data.users
+                            })
+                        
+                    })
+            },
 
 			login: async (formData) => {
                 const store = getStore();
@@ -112,7 +113,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return;
                 }
 				
-                await fetch(store.path + '/api/register', {
+                await fetch(store.path + '/profile/api/v1/users/', {
                     method: 'POST',
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify(formData),
