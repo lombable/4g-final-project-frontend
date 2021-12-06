@@ -5,6 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			error: null,
 			email: null,
 			password: null,
+			confirmedPassword: null,
 			isAuthenticated: false,
 			currentUser: null,
 			token: null,
@@ -64,10 +65,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			getFavoritesList: () => {
-				const store = getStore();
-				store.favorite = [] ? "No has agregado favoritos aún" : store.favorite
-			},
 
 			addTable: (table) => {
 				const store = getStore();
@@ -95,6 +92,84 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 password: null,
                                 error: null,
                                 role: null
+                            })
+                        }
+                    })
+            },
+			
+			register_client: async (formData) => {
+                const store = getStore();
+                if(store.password !== store.confirmedPassword){
+                    setStore({
+                        error: "Contraseñas no son iguales"
+                    })
+                    return;
+                }
+                if(!store.name || !store.last_name || !store.email || !store.rut || !store.address || !store.dob || !store.city){
+                    setStore({
+                        error: "Debe completar todos los campos"
+                    })
+                    return;
+                }
+				
+                await fetch(store.path + '/api/register', {
+                    method: 'POST',
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(formData),
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        if (data.msg) {
+                            setStore({
+                                error: data.msg
+                            })
+                        } else {
+                            setStore({
+                                currentUser: data,
+                                isAuthenticated: true,
+                                email: null,
+                                password: null,
+                                error: null,
+                            })
+                        }
+                    })
+            },
+
+			addProduct: async (e) => {
+                e.preventDefault();
+                const store = getStore();
+                if(!store.productName || !store.productPrice || !store.productCategory || !store.productDescription){
+                    setStore({
+                        error: "Debe completar todos los campos"
+                    })
+                    return;
+                }
+
+                let formData = new FormData()
+                formData.append('productName', store.productName)
+                formData.append('productPrice', store.productPrice)
+                formData.append('productCategory', store.productCategory)
+                formData.append('productDescription', store.productDescription)
+				formData.append('isAvailable', store.isAvailable)
+
+                await fetch(store.path + '/add-product', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        if (data.msg) {
+                            setStore({
+                                error: data.msg
+                            })
+                        } else {
+                            setStore({
+                                productName: null,
+                                isAvailable: null,
+                                productPrice: null,
+								productCategory: null,
+                                productDescription: null,
+                                error: null,
                             })
                         }
                     })

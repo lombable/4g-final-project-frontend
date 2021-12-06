@@ -11,113 +11,132 @@ const ClientRegister = () => {
   const { store, actions } = useContext(Context)
 
   const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
+    dob: '',
+    city: '',
+    rut: '',
+    address: '',
     email: '',
     password: '',
-});
+  });
 
 
-const handleChange = (e) => {
+  const handleChange = (e) => {
+    console.log(e.target.name, e.target.value)
     setFormData({
-        ...formData,
-        [e.target.name]: e.target.value
+      ...formData,
+      [e.target.name]: e.target.value
     });
-}
+  }
 
-const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     console.log(formData)
     e.preventDefault();
-    actions.login(formData)
-}
+    actions.register_client(formData)
+  }
 
   return (
     <><Navbar />
-    <section className="h-100" style={{ backgroundColor: "#d4d6d9" }}>
-      <div className="container py-5 h-100">
-        <div className="row d-flex justify-content-center align-items-center h-100">
-          <div className="col">
-            <div className="card card-registration my-4">
-              <div className="row g-0">
-                <div className="col-xl-6 d-none d-xl-block">
-                  <img
-                    src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-registration/img4.jpg"
-                    alt="Sample photo"
-                    className="img-fluid rounded" />
-                </div>
-                <form className="col-xl-6" onSubmit={handleSubmit}>
-                  <div className="card-body p-md-5 text-black">
-                    <h3 className="mb-5 text-uppercase">Worker Registration Form</h3>
 
-                    <div className="row">
-                      <div className="col-md-6 mb-4">
-                        <div className="form-outline">
-                          <input type="text" id="form3Example1m" name="first_name" className="form-control form-control-lg" placeholder="Fulanito" onChange={handleChange}/>
-                          <label className="form-label" for="form3Example1m">First name</label>
-                        </div>
-                      </div>
-                      <div className="col-md-6 mb-4">
-                        <div className="form-outline">
-                          <input type="text" name="last_name" onChange={handleChange} placeholder="Pérez" id="form3Example1n" className="form-control form-control-lg" />
-                          <label className="form-label" for="form3Example1n">Last name</label>
-                        </div>
-                      </div>
-                    </div>
+      {
+        store.error !== null ? (
+        <div className="alert alert-danger pt-5 mt-3" role="alert">
+          {store.error}
+        </div> ) : store.error == null
+      }
 
-                    <div className="row">
-                      <div className="col-md-6 mb-4">
-                        <div className="form-outline">
-                          <input type="text" id="form3Example1m1" name="rut" onChange={handleChange} placeholder="12.345.678-K" className="form-control form-control-lg" />
-                          <label className="form-label" for="form3Example1m1">R.U.T number</label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="form-outline mb-4">
-                      <input type="text" name="address" placeholder="Av. Manquehue Sur 350, Oficina 110, Las Condes, Región Metropolitana" id="form3Example8" className="form-control form-control-lg" />
-                      <label className="form-label" for="form3Example8">Home Address</label>
-                    </div>
-
-                    <div className="row">
-
-                      <div className="col-md-6 mb-4">
-
-                        <select className="select" onChange={handleChange} name="city">
-                          <option value="1">City</option>
-                          <option value="2">Santiago Centro</option>
-                          <option value="3">Macul</option>
-                          <option value="4">Ñuñoa</option>
-                        </select>
-
-                      </div>
-                    </div>
-
-                    <div className="form-outline mb-4">
-                      <input type="text" name="dob" onChange={handleChange} id="form3Example9" className="form-control form-control-lg" />
-                      <label className="form-label" for="form3Example9">Date of Birth</label>
-                    </div>
-
-                    <div className="form-outline mb-4">
-                      <input type="text" id="form3Example97" name="email" onChange={handleChange} className="form-control form-control-lg" />
-                      <label className="form-label" for="form3Example97">Email</label>
-                    </div>
-
-                    <div className="form-outline mb-4">
-                      <input type="password" id="form3Example97" name="password" className="form-control form-control-lg" onChange={handleChange} />
-                      <label className="form-label" for="form3Example97">Password</label>
-                    </div>
-
-                    <div className="d-flex justify-content-end pt-3">
-                      <button type="button" className="btn btn-light btn-lg">Reset all</button>
-                      <button type="submit" className="btn btn-warning btn-lg ms-2">Submit form</button>
-                    </div>
-
+      <section className="h-100" style={{ backgroundColor: "#d4d6d9" }}>
+        <div className="container py-5 h-100">
+          <div className="row d-flex justify-content-center align-items-center h-100">
+            <div className="col">
+              <div className="card card-registration my-4">
+                <div className="row g-0">
+                  <div className="col-xl-6 d-none d-xl-block">
+                    <img
+                      src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-registration/img4.jpg"
+                      alt="Sample photo"
+                      className="img-fluid rounded" />
                   </div>
-                </form>
+                  <form className="col-xl-6" onSubmit={handleSubmit}>
+                    <div className="card-body p-md-5 text-black">
+                      <h3 className="mb-5 text-uppercase">Worker Registration Form</h3>
+
+                      <div className="row">
+                        <div className="col-md-6 mb-4">
+                          <div className="form-outline">
+                            <input type="text" id="form3Example1m" name="first_name" className="form-control form-control-lg" placeholder="Fulanito" onChange={handleChange} />
+                            <label className="form-label" for="form3Example1m">First name</label>
+                          </div>
+                        </div>
+                        <div className="col-md-6 mb-4">
+                          <div className="form-outline">
+                            <input type="text" name="last_name" onChange={handleChange} placeholder="Pérez" id="form3Example1n" className="form-control form-control-lg" />
+                            <label className="form-label" for="form3Example1n">Last name</label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="row">
+                        <div className="col-md-6 mb-4">
+                          <div className="form-outline">
+                            <input type="text" id="form3Example1m1" name="rut" onChange={handleChange} placeholder="12.345.678-K" className="form-control form-control-lg" />
+                            <label className="form-label" for="form3Example1m1">R.U.T number</label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="form-outline mb-4">
+                        <input type="text" name="address" placeholder="Av. Manquehue Sur 350, Oficina 110, Las Condes, Región Metropolitana" id="form3Example8" className="form-control form-control-lg" onChange={handleChange} />
+                        <label className="form-label" for="form3Example8">Home Address</label>
+                      </div>
+
+                      <div className="row">
+
+                        <div className="col-md-6 mb-4">
+
+                          <select className="select" name="city" onChange={handleChange} name="city">
+                            <option value="">City</option>
+                            <option value="santiago">Santiago Centro</option>
+                            <option value="macul">Macul</option>
+                            <option value="ñuñoa">Ñuñoa</option>
+                          </select>
+
+                        </div>
+                      </div>
+
+                      <div className="form-outline mb-4">
+                        <input type="text" name="dob" onChange={handleChange} id="form3Example9" className="form-control form-control-lg" />
+                        <label className="form-label" for="form3Example9">Date of Birth</label>
+                      </div>
+
+                      <div className="form-outline mb-4">
+                        <input type="text" id="form3Example97" name="email" onChange={handleChange} className="form-control form-control-lg" />
+                        <label className="form-label" for="form3Example97">Email</label>
+                      </div>
+
+                      <div className="form-outline mb-4">
+                        <input type="password" id="form3Example97" name="password" className="form-control form-control-lg" onChange={handleChange} />
+                        <label className="form-label" for="form3Example97">Password</label>
+                      </div>
+
+                      <div className="form-outline mb-4">
+                        <input type="password" id="form3Example97" name="confirmedPassword" className="form-control form-control-lg" onChange={handleChange} />
+                        <label className="form-label" for="form3Example97">Please enter password again</label>
+                      </div>
+
+                      <div className="d-flex justify-content-end pt-3">
+                        <button type="submit" className="btn btn-warning btn-lg ms-2" onSubmit={handleSubmit}>Submit form</button>
+                      </div>
+
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section></>
+      </section></>
   )
 }
 
